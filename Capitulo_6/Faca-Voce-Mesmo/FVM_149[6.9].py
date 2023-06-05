@@ -11,5 +11,8 @@ favorite_places = {
     'Duda': ['casa', 'mercado', 'cinema']
 }
 
-for person, value in favorite_places.items():
-    print(f"{person} favorite places are: {value[0], value[1], value[2]}")
+for person in favorite_places:
+    print(f"{person} favorite places are:")
+    print(f"\t{favorite_places[person][0].title()}")
+    print(f"\t{favorite_places[person][1].title()}")
+    print(f"\t{favorite_places[person][2].title()}")
