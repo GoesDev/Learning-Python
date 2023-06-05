@@ -7,3 +7,18 @@
 # tiverem respondido à enquete, mostre uma mensagem agradecendo-lhes por
 # responder. Se ainda não participaram da enquete, apresente uma mensagem
 # convidando-as a responder.
+
+persons = ['goes', 'julio', 'duda', 'maria', 'turif']
+
+favorite_languages = {
+    'goes': 'python',
+    'duda': 'java',
+    'julio': 'javascript',
+    'maria': 'python'
+}
+
+for name in persons:
+    if name in favorite_languages.keys():
+        print(f"Thank you {name.title()}!")
+    else:
+        print(f"Responda a enquete {name.title()}!")
