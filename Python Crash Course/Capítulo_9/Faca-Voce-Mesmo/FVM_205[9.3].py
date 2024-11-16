@@ -29,13 +29,26 @@ class User():
         self.login_attempts = 0
 
 
-goes = User('julio', 'cesar')
-goes.descibre()
-goes.greet_user()
-goes.increment_login_attempts()
-goes.increment_login_attempts()
-goes.increment_login_attempts()
-goes.increment_login_attempts()
-print(goes.login_attempts)
-goes.reset_login_attempts()
-print(goes.login_attempts)
+class Privileges():
+
+    def __init__(self) -> None:
+        self.privileges = [
+            'can add post',
+            'can delete post',
+            'can ban user'
+        ]
+
+
+class Admin(User):
+
+    def __init__(self, first_name, last_name, login_attempts=0) -> None:
+        super().__init__(first_name, last_name, login_attempts)
+        self.privileges = Privileges()
+
+    def show_privileges(self):
+        for p in self.privileges.privileges:
+            print(f"{self.first_name.title()} {p}")
+
+
+goes_admin = Admin('Júlio', 'Goes')
+goes_admin.show_privileges()
