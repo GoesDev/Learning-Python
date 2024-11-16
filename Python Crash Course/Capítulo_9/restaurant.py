@@ -10,10 +10,11 @@ dois atributos individualmente e, em seguida, chame os dois métodos.
 
 class Restaurant():
 
-    def __init__(self, name, cuisine_type):
+    def __init__(self, name, cuisine_type, number_served=0):
 
         self.name = name
         self.cuisine_type = cuisine_type
+        self.number_served = number_served
 
     def descibre_restaurant(self):
         print(f"Restaurant's name: {self.name}")
@@ -22,9 +23,15 @@ class Restaurant():
     def open_restaurant(self):
         print(f"{self.name} is now open!")
 
+    def set_number_served(self, number_served):
+        self.number_served = number_served
+
+    def increment_number_served(self, number_served):
+        self.number_served += number_served
+
 
 my_restaurant = Restaurant('Bar do Giba', 'Boteco')
-print(my_restaurant.name)
-print(my_restaurant.cuisine_type)
-my_restaurant.descibre_restaurant()
-my_restaurant.open_restaurant()
+print(my_restaurant.number_served)
+my_restaurant.set_number_served(15)
+my_restaurant.increment_number_served(15)
+print(my_restaurant.number_served)

@@ -10,9 +10,10 @@ métodos para cada usuário."""
 
 class User():
 
-    def __init__(self, first_name, last_name) -> None:
+    def __init__(self, first_name, last_name, login_attempts=0) -> None:
         self.first_name = first_name
         self.last_name = last_name
+        self.login_attempts = login_attempts
 
     def descibre(self):
         print(f"User's first name: {self.first_name.title()}")
@@ -21,7 +22,20 @@ class User():
     def greet_user(self):
         print(f"Welcome {self.first_name.title()}!")
 
+    def increment_login_attempts(self):
+        self.login_attempts += 1
+
+    def reset_login_attempts(self):
+        self.login_attempts = 0
+
 
 goes = User('julio', 'cesar')
 goes.descibre()
 goes.greet_user()
+goes.increment_login_attempts()
+goes.increment_login_attempts()
+goes.increment_login_attempts()
+goes.increment_login_attempts()
+print(goes.login_attempts)
+goes.reset_login_attempts()
+print(goes.login_attempts)
