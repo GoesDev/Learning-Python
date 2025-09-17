@@ -82,6 +82,17 @@ def atualizar_tarefa_status(conn, id_tarefa, status):
     conn.commit()
     print(f'Status da Tarefa ID {id_tarefa} atualizado para {status}')
 
+def deletar_tarefa(conn, id_tarefa):
+    """Deleta uma tarefa pelo ID"""
+    sql = 'DELETE FROM tarefas WHERE id = ?'
+    
+    cursor = conn.cursor()
+    cursor.execute(sql,(id_tarefa,)) # A vírgula após id_tarefas é crucial
+
+    conn.commit()
+    print(f'\nTarefa ID {id_tarefa} deletada.')
+
+
 # Tentativa de Conexão
 conexao = conectar_db(DB_FILE)
 
@@ -102,9 +113,20 @@ conexao = conectar_db(DB_FILE)
 # if conexao:
 #     selecionar_todas_tarefas(conexao)
 
-if conexao:
-    # Marca a tarefa de ID 1 como concluida (status = 1)
-    atualizar_tarefa_status(conexao, 1, 1)
+# if conexao:
+#     # Marca a tarefa de ID 1 como concluida (status = 1)
+#     atualizar_tarefa_status(conexao, 1, 1)
 
-    # Vamos ver a lista novamente para conferir
+#     # Vamos ver a lista novamente para conferir
+#     selecionar_todas_tarefas(conexao)
+
+if conexao:
+    # Deleta a tarefa 3 e 4
+    deletar_tarefa(conexao, 3)
+    deletar_tarefa(conexao, 4)
+
     selecionar_todas_tarefas(conexao)
+
+    # É fundamental fechar a conexão ao terminar conexao.close()
+    conexao.close()
+    print('\nConexão com o banco de dados fechada')
