@@ -34,10 +34,27 @@ def criar_tabela(conn):
         print("Não há conexão com o banco de dados")
 
 def novo_contato(conn, contato):
-    pass
+    sql_insert_into = """INSERT INTO contatos (nome, telefone, email) VALUES (?, ?, ?)"""
+
+    cursor = conn.cursor()
+    cursor.execute(sql_insert_into, contato)
+    conn.commit()
+    return cursor.lastrowid
 
 def visualizar_contatos(conn):
-    pass
+    sql_select = 'SELECT id, nome, telefone, email FROM contatos'
+
+    cursor = conn.cursor()
+    cursor.execute(sql_select)
+
+    linhas = cursor.fetchall()
+
+    if linhas:
+        print('\nMeus Contatos')
+        for linha in linhas:
+            print(f'ID: {linha[0]} | Nome: {linha[1]} | Telefone: {linha[2]} | Email: {linha[3]}')
+    else:
+        print('Nenhuma tarefa encontrada.')
 
 def atualizar_contato_telefone(conn, id_contato, telefone):
     pass
@@ -55,4 +72,9 @@ def visualizar_contato_por_nome(conn, nome):
 conexao = conectar_db(DB_FILE)
 
 if conexao:
-    criar_tabela(conexao)
+    # criar_tabela(conexao)
+
+    # contato = ('Kassandra', '777', 'kas@email')
+    # contato_id = novo_contato(conexao, contato)
+
+    visualizar_contatos(conexao)
