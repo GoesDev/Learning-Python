@@ -57,16 +57,44 @@ def visualizar_contatos(conn):
         print('Nenhuma tarefa encontrada.')
 
 def atualizar_contato_telefone(conn, id_contato, telefone):
-    pass
+    sql_update = """UPDATE contatos SET telefone = ? WHERE id = ?"""
+
+    cursor = conn.cursor()
+    cursor.execute(sql_update, (telefone, id_contato))
+
+    conn.commit()
+
+    print(f"Telefone do Contato ID {id_contato} atualizado para {telefone}")
 
 def atualizar_contato_email(conn, id_contato, email):
-    pass
+    sql_update = """UPDATE contatos SET email = ? WHERE id = ?"""
+
+    cursor = conn.cursor()
+    cursor.execute(sql_update, (email, id_contato))
+
+    conn.commit()
+
+    print(f"Email do Contato ID {id_contato} atualizado para {email}")
 
 def deletar_contato(conn, id_contato):
-    pass
+    sql_delete_contato = """DELETE FROM contatos WHERE id = ?"""
+
+    cursor = conn.cursor()
+    cursor.execute(sql_delete_contato, (id_contato,))
+
+    conn.commit()
+
+    print(f'\nContato ID {id_contato} deletado com sucesso')
 
 def visualizar_contato_por_nome(conn, nome):
-    pass
+    sql_select = 'SELECT id, telefone, email FROM contatos WHERE nome = ?'
+
+    cursor = conn.cursor()
+    cursor.execute(sql_select, (nome,))
+
+    linha = cursor.fetchone()
+
+    print(f'ID: {linha[0]} | Nome: {nome} | Telefone: {linha[1]} | Email: {linha[2]}')
 
 
 conexao = conectar_db(DB_FILE)
@@ -77,4 +105,14 @@ if conexao:
     # contato = ('Kassandra', '777', 'kas@email')
     # contato_id = novo_contato(conexao, contato)
 
-    visualizar_contatos(conexao)
+    # visualizar_contatos(conexao)
+
+    # atualizar_contato_telefone(conexao, '1', '776')
+    # atualizar_contato_email(conexao, '2', 'novo@email.com')
+
+    # deletar_contato(conexao, 2)
+
+    # visualizar_contatos(conexao)
+
+    visualizar_contato_por_nome(conexao, 'Kassandra')
+
